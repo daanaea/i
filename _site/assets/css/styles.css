@@ -2,4 +2,6 @@ body { width: 100%; height: 100vh; margin: 0; padding: 0; font-family: Arial, sy
 
 main > div { height: 10rem; margin: 2rem; border: darkgrey 1px solid; border-radius: 8px; overflow: hidden; }
 
-h1 { text-align: center; color: gray; }
+h1 { text-align: center; }
+
+a { font-family: Inter; }
