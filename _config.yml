@@ -1,0 +1,9 @@
+# Site settings
+title: Great New Blog Title
+author:
+  name: Sardaana Eginova
+  email: eginovasardaana@berkeley.edu
+description: "Great site on Jekyll on GH-Pages."
+
+# Build settings
+remote_theme: daanaea/sardaanaeginova.github.io
