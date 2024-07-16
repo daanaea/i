@@ -2,7 +2,7 @@
 layout: default
 ---
 <div class="border-0" style="height: 100%;">
-    <h1 class="text-center" style="font-family: 'Pacifico'; font-size: 74px;">Hi! This is Sara Eginova</h1>
+    <h1 class="text-center" style="font-family: 'Pacifico'; font-size: 74px;">Hi! This is Sara Eginova.</h1>
 
     <div class="w-100 d-flex justify-content-center">
         <div class="w-50 align-self-center">
@@ -14,8 +14,44 @@ layout: default
         </div>
     </div>
 
-    <!-- Illustration -->
-    <div>
+    
 
-    </div>
+    <!-- Illustration -->
+     <svg xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 30 20"
+            onload="makeDraggable(evt)">
+        <rect x="0" y="0" width="30" height="20" fill="#FAFAFA"></rect>
+        <rect class="draggable" x="4" y="5" width="8" height="10" fill="#007BFF"/>
+        <rect class="static" x="18" y="5" width="8" height="10" fill="#888"/>
+     </svg>
+
+    <script>
+        var selectedElement = false;
+
+        function makeDraggable(evt) {
+            var svg = evt.target;
+            svg.addEventListener('mousedown', startDrag);
+            svg.addEventListener('mousemove', drag);
+            svg.addEventListener('mouseup', endDrag);
+            svg.addEventListener('mouseleave', endDrag);
+        }
+
+        function startDrag(evt) {
+            if (evt.target.classList.contains('draggable')) {
+                selectedElement = evt.target;
+            }
+        }
+
+        function drag(evt) {
+            if (selectedElement) {
+                evt.preventDefault(); // blocks any other dragging behavior
+                var x = parseFloat(selectedElement.getAttributeNS(null, "x"));
+                selectedElement.setAttributeNS(null, "x", x + 0.1);
+            }
+        }
+
+        function endDrag(evt) {
+            selectedElement = null;
+        }
+    </script>
 </div>
