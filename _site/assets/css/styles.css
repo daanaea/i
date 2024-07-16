@@ -9,3 +9,5 @@ a { font-family: Inter; }
 .static { cursor: not-allowed; }
 
 .draggable { cursor: move; }
+
+.shelf-text-gradient { position: absolute; top: 10%; left: 10%; font-size: 34px; font-family: Inter, Arial; background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44); -webkit-text-fill-color: transparent; -webkit-background-clip: text; }
