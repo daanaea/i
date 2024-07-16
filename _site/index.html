@@ -66,7 +66,7 @@
             <!-- <path x="0" y="10" class="draggable" d="M1 67H77M1 67V258H77M1 67L39 0.5H115M77 67V258M77 67L115 0.5M77 258L115 191.371V0.5" stroke="black"/> -->
             
             <!-- <rect width="318" height="441" fill="white"/> -->
-            <g class="draggable">
+            <g class="draggable-group">
                 <rect x="102" y="155.629" width="76" height="197" fill="#1F06FF"/>
                 <path d="M178 155.629L216 89V285.629L178 352.258V155.629Z" fill="#1100AB"/>
                 <path d="M178 155.629L216 89.1292H140L102 155.629H178Z" fill="#BFD8FF"/>
@@ -141,9 +141,7 @@
 
             var selectedElement, offset, transform;
 
-            function startDrag(evt) {
-            if (evt.target.classList.contains('draggable')) {
-                selectedElement = evt.target;
+            function initialiseDragging(evt) {
                 offset = getMousePosition(evt);
 
                 // Make sure the first transform on the element is a translate transform
@@ -160,6 +158,15 @@
                 transform = transforms.getItem(0);
                 offset.x -= transform.matrix.e;
                 offset.y -= transform.matrix.f;
+            }
+
+            function startDrag(evt) {
+            if (evt.target.classList.contains('draggable')) {
+                selectedElement = evt.target;
+                initialiseDragging(evt);
+            } else if (evt.target.parentNode.classList.contains('draggable-group')) {
+                selectedElement = evt.target.parentNode;
+                initialiseDragging(evt);
             }
             }
 
