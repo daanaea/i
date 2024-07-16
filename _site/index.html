@@ -77,7 +77,7 @@
                 <rect x="139" y="131.629" width="76" height="191" fill="#1F06FF"/>
                 <path d="M215 131.258L253 64.6291V256L215 322.629V131.258Z" fill="#1100AB"/>
                 <path d="M215 131.629L253 65.1291H177L139 131.629H215Z" fill="#BFD8FF"/>
-                <text
+                <text id="scrambleText1"
                     transform="translate(100,100) rotate(270)"
                     x="-210" y="70"
                     font-family="Arial"
@@ -100,7 +100,7 @@
                 <rect x="305" y="80.6291" width="76" height="242" fill="#1F06FF"/>
                 <path d="M381 80.6291L419 14V256L381 322.629V80.6291Z" fill="#1100AB"/>
                 <path d="M381 80.6291L419 14.1291H343L305 80.6291H381Z" fill="#BFD8FF"/>
-                <text
+                <text id="scrambleText2"
                     transform="translate(100,100) rotate(270)"
                     x="-210" y="235"
                     font-family="Arial"
@@ -123,7 +123,7 @@
                 <rect x="481" y="131.629" width="76" height="191" fill="#1F06FF"/>
                 <path d="M557 131.258L595 64.6291V256L557 322.629V131.258Z" fill="#1100AB"/>
                 <path d="M557 131.629L595 65.1291H519L481 131.629H557Z" fill="#BFD8FF"/>
-                <text
+                <text id="scrambleText3"
                     transform="translate(100,100) rotate(270)"
                     x="-210" y="410"
                     font-family="Arial"
@@ -153,6 +153,13 @@
             
     </div>
 
+    <script src="../assets/js/main.js">
+    </script>
+    <script>
+        var scrambleText1 = new ScrambleText( document.getElementById("scrambleText1") ).start();
+        var scrambleText2 = new ScrambleText( document.getElementById("scrambleText2") ).start();
+        var scrambleText3 = new ScrambleText( document.getElementById("scrambleText3") ).start();
+    </script>
 
     <script>
         function makeDraggable(evt) {
