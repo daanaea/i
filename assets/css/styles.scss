@@ -2,6 +2,8 @@
 ---
 @import "base";
 
+
+// Draggable elements
 .static {
     cursor: not-allowed;
 }
@@ -10,15 +12,50 @@
     cursor: move;
 }
 
-.shelf-text-gradient {
-    position: absolute; 
-    top: 10%; 
-    left: 10%; 
+// Text underline for paragraph
+.wavy {
+    text-decoration-style: wavy;
+    text-decoration-line: underline;
+    text-decoration-color: red;
+}
 
-    font-size: 34px; 
-    font-family: Inter, Arial; // Arial, if failed to load Inter 
-    background: linear-gradient(to right, #f32170, 
-            #ff6b08, #cf23cf, #eedd44); 
-    -webkit-text-fill-color: transparent; 
-    -webkit-background-clip: text; 
+// Text highlight in a box
+.sketch-highlight{
+    position:relative;
+    padding: 0 5px;
+}
+  
+.sketch-highlight:before{
+    content:"";
+    z-index:-1;
+    left:0em;
+    top:0em;
+    border-width:2px;
+    border-style:solid;
+    border-color:darkblue;
+    position:absolute;
+    border-right-color:transparent;
+    width:100%;
+    height:1em;
+    transform:rotate(2deg);
+    opacity:0.5;
+    border-radius:0.25em;
+}
+  
+.sketch-highlight:after{
+    content:"";
+    z-index:-1;
+    left:0em;
+    top:0em;
+    border-width:2px;
+    border-style:solid;
+    border-color:darkblue;
+    border-left-color:transparent;
+    border-top-color:transparent;
+    position:absolute;
+    width:100%;
+    height:1em;
+    transform:rotate(-1deg);
+    opacity:0.5;
+    border-radius:0.25em;
 }
