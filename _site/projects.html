@@ -108,7 +108,27 @@
     </div>
     <!-- Card 2 -->
     <div class="col">
-        <div class="card" style="background-color: #F3F3F3; border-radius: 0px;">
+        <div class="card" style="border-radius: 0px;">
+            <!-- paper_list.svg -->
+            <svg onload="makeDraggable(evt)"
+                    width="100%" height="100%"
+                    viewBox="0 0 527 293" fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    >
+                <!-- Pins -->
+                <rect class="static" width="527" height="293"
+                    fill="#F3F3F3"/>
+                <path class="draggable" d="M401.73 83.2652C403.599 72.2449 419.401 72.2449 421.27 83.2652C422.652 91.4191 432.798 94.4035 438.361 88.2928C445.88 80.0341 459.174 88.5931 454.799 98.876C451.562 106.484 458.486 114.49 466.464 112.363C477.246 109.487 483.811 123.888 474.581 130.169C467.752 134.816 469.257 145.301 477.116 147.833C487.738 151.254 485.489 166.924 474.335 167.208C466.082 167.419 461.69 177.055 466.935 183.441C474.025 192.073 463.677 204.037 454.14 198.235C447.083 193.942 438.188 199.669 439.155 207.883C440.461 218.984 425.299 223.445 420.406 213.398C416.787 205.965 406.213 205.965 402.594 213.398C397.702 223.445 382.539 218.984 383.845 207.883C384.812 199.669 375.917 193.942 368.86 198.235C359.323 204.037 348.975 192.073 356.065 183.441C361.31 177.055 356.918 167.419 348.665 167.208C337.511 166.924 335.262 151.254 345.884 147.833C353.743 145.301 355.248 134.816 348.419 130.169C339.189 123.888 345.754 109.487 356.536 112.363C364.514 114.49 371.438 106.484 368.201 98.876C363.826 88.5931 377.12 80.0341 384.639 88.2928C390.202 94.4035 400.348 91.4191 401.73 83.2652Z"
+                    fill="#FFD06A"/>
+                <path class="draggable" d="M244 87L249.25 146.75M254.5 206.5L249.25 146.75M249.25 146.75C266.913 158.355 273.053 144.522 282 109"
+                    stroke="#56CA5E" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
+                <path class="draggable" d="M143.897 213.726L41.4999 198.747C27.9205 196.76 27.7721 177.22 41.3197 175.027L71.2873 170.177C78.8872 168.947 83.3793 160.98 80.4983 153.841L65.0343 115.519C60.3106 103.813 74.5412 93.6876 84.0522 101.987L113.777 127.925C119.728 133.118 128.987 131.245 132.451 124.146L148.469 91.3237C154.429 79.1123 172.898 84.6509 171.154 98.1266L157.535 203.392C156.675 210.042 150.532 214.696 143.897 213.726Z"
+                    fill="#FF0000"/>                
+                <!-- Text -->
+                <text x="145" y="45" fill="#B9B9B9">
+                    <--- Pins are draggable --->
+                </text>
+            </svg>
             <div class="card-body">
                 <h4 class="ps-1 pt-3 card-title text-black">
                     <span class="highlight-container">
@@ -201,65 +221,82 @@
     </div>
     <!-- Card 4 -->
     <div class="col">
-        <div class="card">
-            <!-- paper_list.svg -->
+        <div class="card" style="background-color: #2E0303; border-radius: 0px;">
+            <!-- polka_embdedded.svg -->
             <svg onload="makeDraggable(evt)"
-                    width="100%" height="100%"
-                    viewBox="0 0 527 701" fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    >
-                <!-- Pins -->
-                <rect class="static" width="527" height="701" fill="#F3F3F3"/>
-                <path class="draggable" d="M390.313 424.773C392.526 411.742 411.246 411.742 413.46 424.773C415.098 434.415 427.116 437.944 433.707 430.719C442.615 420.953 458.363 431.074 453.18 443.233C449.345 452.23 457.548 461.696 466.999 459.181C479.772 455.781 487.549 472.809 476.615 480.236C468.524 485.732 470.307 498.13 479.618 501.123C492.201 505.169 489.537 523.699 476.323 524.035C466.547 524.284 461.343 535.678 467.557 543.23C475.956 553.437 463.697 567.585 452.399 560.724C444.04 555.647 433.502 562.42 434.647 572.132C436.194 585.259 418.233 590.533 412.437 578.654C408.149 569.864 395.623 569.864 391.335 578.654C385.54 590.533 367.578 585.259 369.126 572.132C370.271 562.42 359.733 555.647 351.374 560.724C340.076 567.585 327.816 553.437 336.215 543.23C342.43 535.678 337.226 524.284 327.449 524.035C314.236 523.699 311.571 505.169 324.155 501.123C333.466 498.13 335.248 485.732 327.158 480.236C316.224 472.809 324.001 455.781 336.774 459.181C346.225 461.696 354.428 452.23 350.593 443.233C345.41 431.074 361.158 420.953 370.065 430.719C376.656 437.944 388.675 434.415 390.313 424.773Z"
-                    fill="#FFD06A"/>
-                <path class="draggable" d="M364 151L369.25 210.75M374.5 270.5L369.25 210.75M369.25 210.75C386.913 222.355 393.053 208.522 402 173"
-                    stroke="#56CA5E" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
-                <path class="draggable" d="M206.897 249.726L104.5 234.747C90.9205 232.76 90.7721 213.22 104.32 211.027L134.287 206.177C141.887 204.947 146.379 196.98 143.498 189.841L128.034 151.519C123.311 139.813 137.541 129.688 147.052 137.987L176.777 163.925C182.728 169.118 191.987 167.245 195.451 160.146L211.469 127.324C217.429 115.112 235.898 120.651 234.154 134.127L220.535 239.392C219.675 246.042 213.532 250.697 206.897 249.726Z"
-                    fill="#FF0000"/>
-                <!-- Text announcements -->
-                <!-- <text
-                    x="0" y="70"
-                    style="font-weight: 900;"
-                    font-size="20" fill="black"
-                    class="">
-                    <tspan>
-                        Monthly highlight:
-                    </tspan>
-                    
-                    July
-                </text>
-                <text
-                    x="0" y="95"
-                    font-family="Arial"
-                    style="font-weight: 100;"
-                    font-size="20" fill="black">
-                    Leo Tolstoy
-                </text> -->
+                    width="100%" height="137"
+                    viewBox="0 0 527 137" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                <!-- Shelf -->
+                <g class="static">
+                    <rect width="527" height="137" fill="#2E0303"/>
+                    <path d="M38 70L0 136.5H527V70H38Z" fill="#400000"/>
+                    <path d="M0 137L38 70.5V0H0V137Z" fill="#501C1C"/>
+                </g>
+                <!-- Book -->
+                <g class="draggable-group">
+                    <rect width="76" height="216" transform="matrix(-4.37114e-08 -1 -1 4.37114e-08 407 137)" fill="#1F06FF"/>
+                    <path d="M407 61L473.629 23L257.629 23L191 61L407 61Z" fill="#1100AB"/>
+                    <path d="M407 61L473.5 23L473.5 99L407 137L407 61Z" fill="#BFD8FF"/>
+                    <text id="scrambleText1"
+                        x="210" y="95"
+                        font-family="Arial"
+                        style="font-weight: 900;"
+                        font-size="20" fill="#FFFFFF">
+                        Fathers and Sons
+                        </text>
+                    <text
+                        x="210" y="120"
+                        font-family="Arial"
+                        style="font-weight: 100;"
+                        font-size="20" fill="#FFFFFF">
+                        Ivan Turgenev
+                    </text>
+                </g>
             </svg>
-            <div class="card-body">
-                <h4 class="ps-1 pt-3 card-title text-black">
-                    <span class="highlight-container">
-                        <span class="highlight">
-                            Monthly Highlight:
-                        </span>
-                        <!-- Can put text here if want to make "spoilers" -->
-                    </span>
-                    July
-                </h5>
-                <p class="ps-1 card-text text-black">
-                    Big news – I finally launched the website!
-                    The idea was to incorporate my passion for design yet make it concise and simple for dev.
-                    <br>
-                    Other news: moved out, rested for a week, and now getting into work.
-                </p>
-            </div>
+            <a style="text-decoration: none;"
+                    href="https://getbootstrap.com/docs/5.0/examples/masonry/">
+                <div class="card-body">
+                    <h4 style="font-family: 'Work Sans'; font-weight: bold;"
+                        class="ps-1 card-title text-light">
+                        Making a website with Jekyll+Bootstrap
+                    </h5>
+                    <p style="font-family: 'Work Sans'; "
+                        class="ps-1 card-text text-light">
+                        This is a longer card with supporting text below as a natural lead-in to additional content.
+                        This content is a little bit longer.
+                    </p>
+                    <!-- Removed type="button", because using just as a tag! -->
+                    <button class="ms-1 btn"
+                            style="border-radius: 0px; background-color: #FF0000; color: white;">
+                        Dev
+                    </button>
+                    <button class="btn ms-2"
+                            style="border-radius: 0px; background-color: #FFB20B; color: white;">
+                        HTML/CSS
+                    </button>
+                    <button class="btn ms-2"
+                            style="border-radius: 0px; background-color: #4BC654; color: white;">
+                        Tutorial
+                    </button>
+                    <!-- Update date -->
+                    <p style="font-family: 'Work Sans'; "
+                        class="ps-1 mt-2 card-text">
+                        <small class="text-muted">
+                            Last updated on July 17, 2024
+                        </small>
+                    </p>
+                </div>
+            </a>
         </div>
     </div>
 </div>
 
 <div class="mt-5">
-
+    <!-- Empty, except this text. -->
 </div>
+
+
   </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script src="assets/js/main.js"></script>
