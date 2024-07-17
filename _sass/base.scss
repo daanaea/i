@@ -16,7 +16,34 @@ h1 {
     text-align: center;
 }
 
-// Text highlight for paragraph
+// Text highlighr AS IF WRITTEN
+.highlight-container, .highlight {
+    position: relative;
+}
+  
+.highlight-container {
+    display: inline-block;
+}
+
+.highlight-container:before {
+    content: " ";
+    display: block;
+    height: 90%;
+    width: 100%;
+    margin-left: -3px;
+    margin-right: -3px;
+    position: absolute;
+    background: #C8FFC0;
+    transform: rotate(2deg);
+    top: -1px;
+    left: -1px;
+    border-radius: 20% 25% 20% 24%;
+    padding: 10px 3px 3px 10px;
+}
+  
+
+// Text highlight for paragraph WITH ANIMATION TO THE RIGTH
+// (like a carpet unrolled)
 mark {
     -webkit-animation: 1.5s highlight 1.5s 1 normal forwards;
             animation: 1.5s highlight 1.5s 1 normal forwards;
