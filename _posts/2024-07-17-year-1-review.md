@@ -1,18 +1,10 @@
 ---
 layout: post
-author: Sara
+author: Sardaana
+title: "Some cool projects coming up! Stay tuned in"
+description: "Nothing yet" # make a short desc on top
 ---
-<!-- 
-First year @ UC Berkeley: classes and general thoughts
 
-Classes and projects/concepts I learned so far with demos
-- how to embed Java coded project onto the website? -->
+Classes and projects/concepts I *learned* so far with demos
 
-<h1>Year 1 Review, or how I (got) cooked</h1>
-
-<p>First year @ UC Berkeley: classes and general thoughts</p>
-
-<p>Classes and projects/concepts I learned so far with demos</p>
-<ul>
-  <li>how to embed Java coded project onto the website?</li>
-</ul>
+how to embed Java coded project onto the website?
