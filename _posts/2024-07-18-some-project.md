@@ -5,6 +5,6 @@ title: "Some cool projects coming up! Stay tuned in"
 description: "Nothing yet" # make a short desc on top
 ---
 
-Classes and projects/concepts I *learned* so far with demos
+Empty for now, but only temporarily. Please come again in the nearest time to check for updates!
 
-how to embed Java coded project onto the website?
+Wrting this to show out the pretty layout that I killed so much time for.
