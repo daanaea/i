@@ -30,6 +30,14 @@
   li {
     font-size: 18px;
   }
+
+  /* Rainbow gradient */
+  .rainbow-gradient {
+    background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light ">
@@ -71,13 +79,47 @@
 <div style="height: 100%;" class="accordion" id="accordionExample">
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingOneSp24">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneSp24" aria-expanded="true" aria-controls="collapseOneSp24">
+      <button class="accordion-button collapsed rainbow-gradient" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneSp24" aria-expanded="true" aria-controls="collapseOneSp24">
         DATA C100: Principles and Techniques of Data Science
       </button>
     </h2>
     <div id="collapseOneSp24" class="accordion-collapse collapse" aria-labelledby="headingOneSp24" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+        <strong>Scope:</strong>
+        <code>Pandas</code> [Series, DataFrame; slicing, grouping, aggregating];
+
+        data cleaning and EDA [granularity, scope, and temporality];
+
+        <code>RegEx</code>;
+
+        visualization [<code>Matplotlib</code>, <code>Seaborn</code>], kernel density estimate;
+
+        sampling [convenience/probability/random sample, chance error; selection/response/non-response bias];
+
+        modeling [bias-variance tradeoff, complexity], loss functions [MAE, MSE], OLS;
+
+        feature engineering [one-hot encoding, polynomial features]
+
+        <code>sklearn</code>, gradient descent [learning rate, dimensionality, batch size], <code>PyTorch</code> [Stochastic GD];
+
+        cross-validation, regularization;
+
+        random variables [expectation, variance], distribution [Bernoulli, Binomial, Uniform, Gaussian];
+
+        <code>SQL</code>;
+
+        logistic regression, cross-entropy loss [decision rule, threshold];
+        
+        linear separability, confusion matrix [accuracy, precision, recall], ROC curve [AUC];
+
+        PCA [singular value decomposition, data variance and centering];
+
+        clustering [K-Means; hierarchical with single/average/complete link], inertia, silhouette score.
+
+        <br>
+        <br>
+
+        Course notes can be accessed <a style="text-decoration: none;" href="https://ds100.org/course-notes/">here</a>.
       </div>
     </div>
   </div>
@@ -129,32 +171,34 @@
 <div style="height: 100%;" class="accordion" id="accordionExample">
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingOneFa23">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneFa23" aria-expanded="true" aria-controls="collapseOneFa23">
+      <button class="accordion-button collapsed rainbow-gradient" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneFa23" aria-expanded="true" aria-controls="collapseOneFa23">
         DATA 8: The Foundations of Data Science
       </button>
     </h2>
     <div id="collapseOneFa23" class="accordion-collapse collapse" aria-labelledby="headingOneFa23" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        <span class="fw-bolder">Scope:</span>
-        visualizations, tables
+        <strong>Scope:</strong>
 
-        sampling, distributions [normal], Chebyshev's Inequality
+        visualization [histograms];
+
+        sampling, distributions [normal, skewed], Chebyshev's Inequality, Central Limit Theorem;
+
+        inference, causality, confounding factors;
   
-        hypothesis testing [null, alternative hypotheses; test statistic, p-value cutoff]
-        A/B testing
+        hypothesis testing [null/alternative, test statistic, p-value cutoff], A/B testing;
 
-        bootstrapping, confidence intervals
+        bootstrapping, confidence intervals;
         
-        variability, Central Limit Theorem
+        linear regression, Least Squares;
         
-        regression line, Least Squares Regression
-        
-        Nearest Neighbors
+        Nearest Neighbors.
+
         <br>
         <br>
-        <code>datascience</code> library based on <code>Pandas</code>.
-        
-        textbook
+
+        Worked with <code>datascience</code> library based on <code>Pandas</code>.
+        <br>
+        The course textbook can be accessed <a style="text-decoration: none;" href="https://inferentialthinking.com/chapters/intro.html">here</a>.
       </div>
     </div>
   </div>
