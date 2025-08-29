@@ -19,7 +19,7 @@ layout: default
                     <a class="nav-link ps-5" href="coursework.html">Coursework</a>
                 </li>
                 <li class="nav-item">
-                    <a class="ps-5 pe-5" href="assets/resume/resume_december_2024.pdf">
+                    <a class="ps-5 pe-5" href="assets/resume/Sardaana_Eginova_aug25.pdf">
                         <button class="btn btn-outline-dark me-2" type="button">
                             Resume
                         </button>
@@ -39,38 +39,29 @@ layout: default
     <!-- Card 1 -->
     <div class="col">
         <div class="card" style="background-color: #2E0303; border-radius: 0px;">
-            <!-- polka_embdedded.svg -->
-            <svg onload="makeDraggable(evt)"
-                    width="100%" height="137"
-                    viewBox="0 0 527 137" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                <!-- Shelf -->
-                <g class="static">
-                    <rect width="527" height="137" fill="#2E0303"/>
-                    <path d="M38 70L0 136.5H527V70H38Z" fill="#400000"/>
-                    <path d="M0 137L38 70.5V0H0V137Z" fill="#501C1C"/>
-                </g>
-                <!-- Book -->
-                <g class="draggable-group">
-                    <rect width="76" height="216" transform="matrix(-4.37114e-08 -1 -1 4.37114e-08 407 137)" fill="#1F06FF"/>
-                    <path d="M407 61L473.629 23L257.629 23L191 61L407 61Z" fill="#1100AB"/>
-                    <path d="M407 61L473.5 23L473.5 99L407 137L407 61Z" fill="#BFD8FF"/>
-                    <text id="scrambleText1"
-                        x="210" y="95"
-                        font-family="Arial"
-                        style="font-weight: 900;"
-                        font-size="20" fill="#FFFFFF">
-                        Fathers and Sons
-                        </text>
-                    <text
-                        x="210" y="120"
-                        font-family="Arial"
-                        style="font-weight: 100;"
-                        font-size="20" fill="#FFFFFF">
-                        Ivan Turgenev
-                    </text>
-                </g>
-            </svg>
+            <!-- Full polka.svg with animations -->
+            <object data="assets/svg/polka.svg" type="image/svg+xml" width="100%" height="200" id="polka-svg">
+                <img src="assets/svg/polka.svg" alt="Animated bookshelf">
+            </object>
+            <script>
+                // Initialize ScrambleText for SVG when loaded
+                document.getElementById('polka-svg').addEventListener('load', function() {
+                    var svgDoc = this.contentDocument;
+                    if (svgDoc) {
+                        // Find all text elements with scrambleText class or id
+                        var scrambleElements = svgDoc.querySelectorAll('[id*="scrambleText"], .scramble-text');
+                        scrambleElements.forEach(function(element) {
+                            new ScrambleText(element, {
+                                timeOffset: 100,
+                                chars: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+                            });
+                        });
+                        
+                        // Enable draggable functionality for the SVG
+                        makeDraggable({target: svgDoc.documentElement});
+                    }
+                });
+            </script>
             <a style="text-decoration: none;"
                     href="https://daanaea.github.io/i/2024/08/07/bike-share-geodata-with-folium">
                 <div class="card-body">

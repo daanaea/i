@@ -19,7 +19,7 @@ layout: default
                     <a class="nav-link ps-5" href="coursework.html">Coursework</a>
                 </li>
                 <li class="nav-item">
-                    <a class="ps-5 pe-5" href="assets/resume/resume_december_2024.pdf">
+                    <a class="ps-5 pe-5" href="assets/resume/Sardaana_Eginova_aug25.pdf">
                         <button class="btn btn-outline-dark me-2" type="button">
                             Resume
                         </button>
@@ -30,10 +30,8 @@ layout: default
     </div>
 </nav>
   
-<h1 class="text-center mt-5" style="font-family: 'Pacifico'; font-size: 74px;">Hi! This is
-    <!-- <span class="sketch-highlight">Sardaana</span> -->
-    Sardaana
-    Eginova.
+<h1 class="text-center mt-5" style="font-family: 'Pacifico'; font-size: 74px;">
+    Hi! This is Sardaana.
 </h1>
 
 <div class="border-0 mt-5" style="height: 100%;">
@@ -52,112 +50,34 @@ layout: default
     </div>
 
     <div style="margin: auto; width: 80%;">
-        <!-- Illustration -->
-        <svg onload="makeDraggable(evt)"
-                width="1298" height="422"
-                viewBox="0 0 1298 422" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-
-            <text x="650" y="220" fill="#B9B9B9"><--- Books are draggable ---></text>
-
-            <!-- Полка -->
-            <g class="static">
-                <path d="M1260 323.129L1298 256.629L38 256.129L0 322.629L1260 323.129Z" fill="#400000"/>
-                <g>
-                    <rect y="322.629" width="1260" height="99" fill="#2E0303"/>
-                    <text x="30" y="385" font-family="Inter" font-size="34" fill="url(#gradient)">A to XYZ</text>
-                </g>
-            </g>
-            
-            <!-- Книга 1 -->
-            <g class="draggable-group">
-                <rect x="139" y="131.629" width="76" height="191" fill="#1F06FF"/>
-                <path d="M215 131.258L253 64.6291V256L215 322.629V131.258Z" fill="#1100AB"/>
-                <path d="M215 131.629L253 65.1291H177L139 131.629H215Z" fill="#BFD8FF"/>
-                <text id="scrambleText1"
-                    transform="translate(100,100) rotate(270)"
-                    x="-210" y="70"
-                    font-family="Arial"
-                    style="font-weight: 900;"
-                    font-size="20" fill="#FFFFFF">
-                    War and Peace
-                </text>
-                <text
-                    transform="translate(100,100) rotate(270)"
-                    x="-210" y="95"
-                    font-family="Arial"
-                    style="font-weight: 100;"
-                    font-size="20" fill="#FFFFFF">
-                    Leo Tolstoy
-                </text>
-            </g>
-            
-            <!-- Книга 2 -->
-            <g class="draggable-group">
-                <rect x="305" y="80.6291" width="76" height="242" fill="#1F06FF"/>
-                <path d="M381 80.6291L419 14V256L381 322.629V80.6291Z" fill="#1100AB"/>
-                <path d="M381 80.6291L419 14.1291H343L305 80.6291H381Z" fill="#BFD8FF"/>
-                <text id="scrambleText2"
-                    transform="translate(100,100) rotate(270)"
-                    x="-210" y="235"
-                    font-family="Arial"
-                    style="font-weight: 900;"
-                    font-size="20" fill="#FFFFFF">
-                    Essays
-                </text>
-                <text
-                    transform="translate(100,100) rotate(270)"
-                    x="-210" y="260"
-                    font-family="Arial"
-                    style="font-weight: 100;"
-                    font-size="20" fill="#FFFFFF">
-                    Michel de Montaigne
-                </text>
-            </g>
-            
-            <!-- Книга 3 -->
-            <g class="draggable-group">
-                <rect x="481" y="131.629" width="76" height="191" fill="#1F06FF"/>
-                <path d="M557 131.258L595 64.6291V256L557 322.629V131.258Z" fill="#1100AB"/>
-                <path d="M557 131.629L595 65.1291H519L481 131.629H557Z" fill="#BFD8FF"/>
-                <text id="scrambleText3"
-                    transform="translate(100,100) rotate(270)"
-                    x="-210" y="410"
-                    font-family="Arial"
-                    style="font-weight: 900;"
-                    font-size="20" fill="#FFFFFF">
-                    Sapiens
-                </text>
-                <text
-                    transform="translate(100,100) rotate(270)"
-                    x="-210" y="435"
-                    font-family="Arial"
-                    style="font-weight: 100;"
-                    font-size="20" fill="#FFFFFF">
-                    Y. N. Harari
-                </text>
-            </g>
-            
-            <defs>
-                <linearGradient id="gradient" x1="31" y1="372.629" x2="179.5" y2="372.629" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#B06868"/>
-                <stop offset="0.3" stop-color="#7F4B4B"/>
-                <stop offset="1" stop-color="#4A2C2C"/>
-            </linearGradient>
-            </defs>
-        </svg>
+        <!-- Animated polka.svg -->
+        <object data="assets/svg/polka.svg" type="image/svg+xml" width="100%" height="400" id="polka-svg-main">
+            <img src="assets/svg/polka.svg" alt="Animated bookshelf">
+        </object>
+        <script>
+            // Initialize ScrambleText for SVG when loaded
+            document.getElementById('polka-svg-main').addEventListener('load', function() {
+                var svgDoc = this.contentDocument;
+                if (svgDoc) {
+                    // Find all text elements with scrambleText class or id
+                    var scrambleElements = svgDoc.querySelectorAll('[id*="scrambleText"], .scramble-text');
+                    scrambleElements.forEach(function(element) {
+                        new ScrambleText(element, {
+                            timeOffset: 100,
+                            chars: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+                        });
+                    });
+                    
+                    // Enable draggable functionality for the SVG
+                    makeDraggable({target: svgDoc.documentElement});
+                }
+            });
+        </script>
             
             
     </div>
 
 
     <script src="assets/js/main.js">
-    </script>
-
-    
-    <script>
-        var scrambleText1 = new ScrambleText( document.getElementById("scrambleText1") ).start();
-        var scrambleText2 = new ScrambleText( document.getElementById("scrambleText2") ).start();
-        var scrambleText3 = new ScrambleText( document.getElementById("scrambleText3") ).start();
     </script>
 </div>
