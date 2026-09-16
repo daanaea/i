@@ -1,0 +1,289 @@
+---
+layout: default
+---
+
+<style>
+  body {
+    width: 60%;
+    margin: auto;
+  }
+  h1 {
+    font-family: 'Literata';
+    font-size: 32px;
+    font-weight: bolder;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  h2 {
+    font-family: 'Literata';
+    font-size: 24px;
+    font-weight: bolder;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  h3 {
+    font-family: 'Literata';
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  p {
+    font-family: 'Literata';
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  a {
+    font-family: 'Literata';
+    text-decoration: none;
+  }
+  .back-link {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .back-link a {
+    color: black;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    margin: 15px 0;
+  }
+  .image-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  .image-row img {
+    max-width: 45%;
+  }
+  .image-row figure {
+    max-width: 45%;
+    margin: 0;
+  }
+  .image-row figure img {
+    max-width: 100%;
+  }
+  figure {
+    text-align: center;
+    margin: 20px 0;
+  }
+  figcaption {
+    font-family: 'Literata';
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light ">
+  <div class="container-fluid ">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+          <ul class="mt-3 navbar-nav">
+              <li class="nav-item" style="font-size: 16px;">
+                  <a class="nav-link ps-5" href="../../index.html" style="font-family: 'Literata'; font-size: 20px;">About</a>
+              </li>
+              <li class="nav-item" style="font-size: 16px;">
+                  <a class="nav-link ps-5" href="../../projects.html" style="font-family: 'Literata'; font-size: 20px;">Teaching</a>
+              </li>
+              <li class="nav-item" style="font-size: 16px;">
+                  <a class="nav-link ps-5" href="../../coursework.html" style="font-family: 'Literata'; font-size: 20px;">Coursework</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>
+
+<p class="back-link"><a href="../">&larr; Back to CS 180</a></p>
+
+
+<h1>Project 1</h1>
+<p>
+  Colorizing through RGB 3-layer alignment.
+</p>
+
+<h2>Single-scale alignment</h2>
+
+<p>
+  For a single-scale alignment, I naively implemented align method by going through all 15x15 chunks and computing
+  Normalized Cross Correlation (NCC) per global shift (dx, dy) of the image.
+</p>
+
+<div class="image-row">
+  <figure>
+    <img src="assets/out_single_with_border_cathedral_G-1_1_R-1_7.jpg" alt="cathedral">
+    <figcaption>cathedral<br>G: (-1, 1) R: (-1, 7)<br>NCC G: x.xx, R: x.xx</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_single_with_border_monastery_G0_-6_R1_9.jpg" alt="monastery">
+    <figcaption>monastery<br>G: (0, -6) R: (1, 9)<br>NCC G: x.xx, R: x.xx</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_single_with_border_tobolsk_G2_3_R3_6.jpg" alt="tobolsk">
+    <figcaption>tobolsk<br>G: (2, 3) R: (3, 6)<br>NCC G: x.xx, R: x.xx</figcaption>
+  </figure>
+</div>
+<p>
+  Removing border while computing loss significantly improved loss for <em>monastery</em> (see below the final result).
+  This is likely because of the black border: the picture is very noncontrastive and bright, and the border shifts the mean distribution of values towards right, worsening NCC score everywhere, which results in a jittered alignment since after normalizing, picture gets even less contrastives and it is harder to align.
+</p>
+
+<h3>Final</h3>
+<div class="image-row">
+  <figure>
+    <img src="assets/out_single_cathedral_G2_5_R3_12.jpg" alt="cathedral">
+    <figcaption>cathedral<br>G: (2, 5) R: (3, 12)<br>NCC G: 0.96, R: 0.91</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_single_monastery_G2_-3_R2_3.jpg" alt="monastery">
+    <figcaption>monastery<br>G: (2, -3) R: (2, 3)<br>NCC G: 0.94, R: 0.79</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_single_tobolsk_G3_3_R3_6.jpg" alt="tobolsk">
+    <figcaption>tobolsk<br>G: (3, 3) R: (3, 6)<br>NCC G: 0.92, R: 0.86</figcaption>
+  </figure>
+</div>
+
+<h2>Multi-scale pyramid alignment</h2>
+
+<p>
+  For a multi-scale alignment, I implemented a <code>pyramid_align</code> colorization method:
+  it first takes in an image and a reference, and recursively rescales the image into twice smaller image.
+  In the base case of next largest image to 256x256, I calculate optimal (dx, dy) shift.
+  Then, I keep upscaling the image until we reach the original shape, and keep adjusting the shift.
+</p>
+
+<p>
+  Notably, I noticed that NCC for low scale images is much higher than for high scale images.
+  This can be explained by the fact that when the resolution of the image is smaller, we differentiate less details and thus alignment task in general is easier.
+</p>
+  <pre>
+  ncc 0.7373644113540649 # 16x downscaled image
+  ncc 0.7347612380981445
+  ncc 0.7180508375167847 # 8x downscaled image
+  ncc 0.7100626826286316
+  ncc 0.7071645259857178 # 4x downscaled image
+  ncc 0.31755244731903076
+  ncc 0.3037656545639038 # 2x downscaled image
+  ncc 0.29053062200546265
+  ncc 0.28564298152923584 # original shapes
+  ncc 0.2835182547569275
+  </pre>
+
+<div class="image-row">
+  <figure>
+    <img src="assets/out_single_emir.jpg" alt="emir without pyramid">
+    <figcaption>Single-scale</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_no_proc_emir.jpg" alt="emir without processing">
+    <figcaption>Multi-scale, no edge detection</figcaption>
+  </figure>
+</div>
+
+
+<p>
+  Pyramid implementation by itself did not improve significantly the alignment compared to the base alignment.
+  The algorithm kept failing on all large <em>.tif</em> files.
+  To capture finer details, I tried edge detection method: Roberts, Scharr, and Sobel.
+  I used Sobel in the final algorithm.
+</p>
+
+<h3>Final</h3>
+<div class="image-row">
+  <figure>
+    <img src="assets/out_multi_cathedral_G2_5_R3_12.jpg" alt="cathedral">
+    <figcaption>cathedral<br>G: (2, 5) R: (3, 12)<br>NCC G: 0.68, R: 0.66</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_monastery_G2_-3_R2_3.jpg" alt="monastery">
+    <figcaption>monastery<br>G: (2, -3) R: (2, 3)<br>NCC G: 0.81, R: 0.82</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_tobolsk_G3_3_R3_6.jpg" alt="tobolsk">
+    <figcaption>tobolsk<br>G: (3, 3) R: (3, 6)<br>NCC G: 0.84, R: 0.77</figcaption>
+  </figure>
+</div>
+
+<div class="image-row">
+  <figure>
+    <img src="assets/out_multi_church_G4_25_R-4_58.jpg" alt="church">
+    <figcaption>church<br>G: (4, 25) R: (-4, 58)<br>NCC G: 0.63, R: 0.55</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_emir_G24_49_R40_107.jpg" alt="emir">
+    <figcaption>emir<br>G: (24, 49) R: (40, 107)<br>NCC G: 0.56, R: 0.51</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_icon_G17_42_R23_90.jpg" alt="icon">
+    <figcaption>icon<br>G: (17, 42) R: (23, 90)<br>NCC G: 0.39, R: 0.35</figcaption>
+  </figure>
+</div>
+
+<div class="image-row">
+  <figure>
+    <img src="assets/out_multi_melons_G10_80_R13_177.jpg" alt="melons">
+    <figcaption>melons<br>G: (10, 80) R: (13, 177)<br>NCC G: 0.43, R: 0.37</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_religous_painting_G7_30_R6_70.jpg" alt="religous_painting">
+    <figcaption>religous_painting<br>G: (7, 30) R: (6, 70)<br>NCC G: 0.52, R: 0.45</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_three_generations_G12_54_R9_111.jpg" alt="three_generations">
+    <figcaption>three_generations<br>G: (12, 54) R: (9, 111)<br>NCC G: 0.53, R: 0.47</figcaption>
+  </figure>
+</div>
+
+<div class="image-row">
+  <figure>
+    <img src="assets/out_multi_self_portrait_G29_78_R37_176.jpg" alt="self_portrait">
+    <figcaption>self_portrait<br>G: (29, 78) R: (37, 176)<br>NCC G: 0.48, R: 0.41</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_siren_G-6_49_R-24_96.jpg" alt="siren">
+    <figcaption>siren<br>G: (-6, 49) R: (-24, 96)<br>NCC G: x.xx, R: x.xx</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_wharf_G-7_15_R-16_83.jpg" alt="wharf">
+    <figcaption>wharf<br>G: (-7, 15) R: (-16, 83)<br>NCC G: 0.62, R: 0.53</figcaption>
+  </figure>
+</div>
+
+<div class="image-row">
+  <figure>
+    <img src="assets/out_multi_harvesters_G17_60_R14_124.jpg" alt="harvesters">
+    <figcaption>harvesters<br>G: (17, 60) R: (14, 124)<br>NCC G: 0.36, R: 0.32</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_ilemselga_G7_40_R11_131.jpg" alt="ilemselga">
+    <figcaption>ilemselga<br>G: (7, 40) R: (11, 131)<br>NCC G: 0.64, R: 0.58</figcaption>
+  </figure>
+</div>
+
+<h3>Chosen images</h3>
+<div class="image-row">
+  <figure>
+    <img src="assets/out_multi_babushka_G-5_60_R-21_130.jpg" alt="babushka">
+    <figcaption>babushka<br>G: (-5, 60) R: (-21, 130)<br>NCC G: 0.73, R: 0.69</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_izbushka_G-16_45_R-17_98.jpg" alt="izbushka">
+    <figcaption>izbushka<br>G: (-16, 45) R: (-17, 98)<br>NCC G: 0.68, R: 0.58</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_napoleon_G4_63_R-1_132.jpg" alt="napoleon">
+    <figcaption>napoleon<br>G: (4, 63) R: (-1, 132)<br>NCC G: 0.54, R: 0.51</figcaption>
+  </figure>
+</div>
+
+<h2>Limitations</h2>
+<p>
+  The project focuses on alignment.
+  However, the coloring is definitely off, and I would love to fix it in future.
+</p>
+<div class="mb-5"></div>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sardaana's shelf</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- Fonts -->
+  <link href='https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&display=swap' rel='stylesheet'>
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/books_icon.png">
+
+  <link rel="stylesheet" href="/assets/css/styles.css?">
+  
+</head>
+<body style="background-color: white;">
+  <main>
+    <style>
+  body {
+    width: 60%;
+    margin: auto;
+  }
+  h1 {
+    font-family: 'Literata';
+    font-size: 32px;
+    font-weight: bolder;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  h2 {
+    font-family: 'Literata';
+    font-size: 24px;
+    font-weight: bolder;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  h3 {
+    font-family: 'Literata';
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  p {
+    font-family: 'Literata';
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  a {
+    font-family: 'Literata';
+    text-decoration: none;
+  }
+  .back-link {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .back-link a {
+    color: black;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    margin: 15px 0;
+  }
+  .image-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  .image-row img {
+    max-width: 45%;
+  }
+  .image-row figure {
+    max-width: 45%;
+    margin: 0;
+  }
+  .image-row figure img {
+    max-width: 100%;
+  }
+  figure {
+    text-align: center;
+    margin: 20px 0;
+  }
+  figcaption {
+    font-family: 'Literata';
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light ">
+  <div class="container-fluid ">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+          <ul class="mt-3 navbar-nav">
+              <li class="nav-item" style="font-size: 16px;">
+                  <a class="nav-link ps-5" href="../../index.html" style="font-family: 'Literata'; font-size: 20px;">About</a>
+              </li>
+              <li class="nav-item" style="font-size: 16px;">
+                  <a class="nav-link ps-5" href="../../projects.html" style="font-family: 'Literata'; font-size: 20px;">Teaching</a>
+              </li>
+              <li class="nav-item" style="font-size: 16px;">
+                  <a class="nav-link ps-5" href="../../coursework.html" style="font-family: 'Literata'; font-size: 20px;">Coursework</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>
+
+<p class="back-link"><a href="../">&larr; Back to CS 180</a></p>
+
+
+<h1>Project 1</h1>
+<p>
+  Colorizing through RGB 3-layer alignment.
+</p>
+
+<h2>Single-scale alignment</h2>
+
+<p>
+  For a single-scale alignment, I naively implemented align method by going through all 15x15 chunks and computing
+  Normalized Cross Correlation (NCC) per global shift (dx, dy) of the image.
+</p>
+
+<div class="image-row">
+  <figure>
+    <img src="assets/out_single_with_border_cathedral_G-1_1_R-1_7.jpg" alt="cathedral">
+    <figcaption>cathedral<br>G: (-1, 1) R: (-1, 7)<br>NCC G: x.xx, R: x.xx</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_single_with_border_monastery_G0_-6_R1_9.jpg" alt="monastery">
+    <figcaption>monastery<br>G: (0, -6) R: (1, 9)<br>NCC G: x.xx, R: x.xx</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_single_with_border_tobolsk_G2_3_R3_6.jpg" alt="tobolsk">
+    <figcaption>tobolsk<br>G: (2, 3) R: (3, 6)<br>NCC G: x.xx, R: x.xx</figcaption>
+  </figure>
+</div>
+<p>
+  Removing border while computing loss significantly improved loss for <em>monastery</em> (see below the final result).
+  This is likely because of the black border: the picture is very noncontrastive and bright, and the border shifts the mean distribution of values towards right, worsening NCC score everywhere, which results in a jittered alignment since after normalizing, picture gets even less contrastives and it is harder to align.
+</p>
+
+<h3>Final</h3>
+<div class="image-row">
+  <figure>
+    <img src="assets/out_single_cathedral_G2_5_R3_12.jpg" alt="cathedral">
+    <figcaption>cathedral<br>G: (2, 5) R: (3, 12)<br>NCC G: 0.96, R: 0.91</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_single_monastery_G2_-3_R2_3.jpg" alt="monastery">
+    <figcaption>monastery<br>G: (2, -3) R: (2, 3)<br>NCC G: 0.94, R: 0.79</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_single_tobolsk_G3_3_R3_6.jpg" alt="tobolsk">
+    <figcaption>tobolsk<br>G: (3, 3) R: (3, 6)<br>NCC G: 0.92, R: 0.86</figcaption>
+  </figure>
+</div>
+
+<h2>Multi-scale pyramid alignment</h2>
+
+<p>
+  For a multi-scale alignment, I implemented a <code>pyramid_align</code> colorization method:
+  it first takes in an image and a reference, and recursively rescales the image into twice smaller image.
+  In the base case of next largest image to 256x256, I calculate optimal (dx, dy) shift.
+  Then, I keep upscaling the image until we reach the original shape, and keep adjusting the shift.
+</p>
+
+<p>
+  Notably, I noticed that NCC for low scale images is much higher than for high scale images.
+  This can be explained by the fact that when the resolution of the image is smaller, we differentiate less details and thus alignment task in general is easier.
+</p>
+  <pre>
+  ncc 0.7373644113540649 # 16x downscaled image
+  ncc 0.7347612380981445
+  ncc 0.7180508375167847 # 8x downscaled image
+  ncc 0.7100626826286316
+  ncc 0.7071645259857178 # 4x downscaled image
+  ncc 0.31755244731903076
+  ncc 0.3037656545639038 # 2x downscaled image
+  ncc 0.29053062200546265
+  ncc 0.28564298152923584 # original shapes
+  ncc 0.2835182547569275
+  </pre>
+
+<div class="image-row">
+  <figure>
+    <img src="assets/out_single_emir.jpg" alt="emir without pyramid">
+    <figcaption>Single-scale</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_no_proc_emir.jpg" alt="emir without processing">
+    <figcaption>Multi-scale, no edge detection</figcaption>
+  </figure>
+</div>
+
+
+<p>
+  Pyramid implementation by itself did not improve significantly the alignment compared to the base alignment.
+  The algorithm kept failing on all large <em>.tif</em> files.
+  To capture finer details, I tried edge detection method: Roberts, Scharr, and Sobel.
+  I used Sobel in the final algorithm.
+</p>
+
+<h3>Final</h3>
+<div class="image-row">
+  <figure>
+    <img src="assets/out_multi_cathedral_G2_5_R3_12.jpg" alt="cathedral">
+    <figcaption>cathedral<br>G: (2, 5) R: (3, 12)<br>NCC G: 0.68, R: 0.66</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_monastery_G2_-3_R2_3.jpg" alt="monastery">
+    <figcaption>monastery<br>G: (2, -3) R: (2, 3)<br>NCC G: 0.81, R: 0.82</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_tobolsk_G3_3_R3_6.jpg" alt="tobolsk">
+    <figcaption>tobolsk<br>G: (3, 3) R: (3, 6)<br>NCC G: 0.84, R: 0.77</figcaption>
+  </figure>
+</div>
+
+<div class="image-row">
+  <figure>
+    <img src="assets/out_multi_church_G4_25_R-4_58.jpg" alt="church">
+    <figcaption>church<br>G: (4, 25) R: (-4, 58)<br>NCC G: 0.63, R: 0.55</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_emir_G24_49_R40_107.jpg" alt="emir">
+    <figcaption>emir<br>G: (24, 49) R: (40, 107)<br>NCC G: 0.56, R: 0.51</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_icon_G17_42_R23_90.jpg" alt="icon">
+    <figcaption>icon<br>G: (17, 42) R: (23, 90)<br>NCC G: 0.39, R: 0.35</figcaption>
+  </figure>
+</div>
+
+<div class="image-row">
+  <figure>
+    <img src="assets/out_multi_melons_G10_80_R13_177.jpg" alt="melons">
+    <figcaption>melons<br>G: (10, 80) R: (13, 177)<br>NCC G: 0.43, R: 0.37</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_religous_painting_G7_30_R6_70.jpg" alt="religous_painting">
+    <figcaption>religous_painting<br>G: (7, 30) R: (6, 70)<br>NCC G: 0.52, R: 0.45</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_three_generations_G12_54_R9_111.jpg" alt="three_generations">
+    <figcaption>three_generations<br>G: (12, 54) R: (9, 111)<br>NCC G: 0.53, R: 0.47</figcaption>
+  </figure>
+</div>
+
+<div class="image-row">
+  <figure>
+    <img src="assets/out_multi_self_portrait_G29_78_R37_176.jpg" alt="self_portrait">
+    <figcaption>self_portrait<br>G: (29, 78) R: (37, 176)<br>NCC G: 0.48, R: 0.41</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_siren_G-6_49_R-24_96.jpg" alt="siren">
+    <figcaption>siren<br>G: (-6, 49) R: (-24, 96)<br>NCC G: x.xx, R: x.xx</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_wharf_G-7_15_R-16_83.jpg" alt="wharf">
+    <figcaption>wharf<br>G: (-7, 15) R: (-16, 83)<br>NCC G: 0.62, R: 0.53</figcaption>
+  </figure>
+</div>
+
+<div class="image-row">
+  <figure>
+    <img src="assets/out_multi_harvesters_G17_60_R14_124.jpg" alt="harvesters">
+    <figcaption>harvesters<br>G: (17, 60) R: (14, 124)<br>NCC G: 0.36, R: 0.32</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_ilemselga_G7_40_R11_131.jpg" alt="ilemselga">
+    <figcaption>ilemselga<br>G: (7, 40) R: (11, 131)<br>NCC G: 0.64, R: 0.58</figcaption>
+  </figure>
+</div>
+
+<h3>Chosen images</h3>
+<div class="image-row">
+  <figure>
+    <img src="assets/out_multi_babushka_G-5_60_R-21_130.jpg" alt="babushka">
+    <figcaption>babushka<br>G: (-5, 60) R: (-21, 130)<br>NCC G: 0.73, R: 0.69</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_izbushka_G-16_45_R-17_98.jpg" alt="izbushka">
+    <figcaption>izbushka<br>G: (-16, 45) R: (-17, 98)<br>NCC G: 0.68, R: 0.58</figcaption>
+  </figure>
+  <figure>
+    <img src="assets/out_multi_napoleon_G4_63_R-1_132.jpg" alt="napoleon">
+    <figcaption>napoleon<br>G: (4, 63) R: (-1, 132)<br>NCC G: 0.54, R: 0.51</figcaption>
+  </figure>
+</div>
+
+<h2>Limitations</h2>
+<p>
+  The project focuses on alignment.
+  However, the coloring is definitely off, and I would love to fix it in future.
+</p>
+<div class="mb-5"></div>
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="instagram" viewBox="0 0 16 16">
+          <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+      </symbol>
+      <symbol id="linkedin" viewBox="0 0 24 24">
+        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+      </symbol>
+      <symbol id="github" viewBox="0 0 24 24">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+      </symbol>
+    </svg>
+
+    <div class="container">
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-8 d-flex align-items-center">
+          <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+            <!-- <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg> -->
+          </a>
+          <span class="mb-3 mb-md-0 text-muted" style="font-family: 'Literata';">&copy; 2026 Sardaana Eginova. Powered by <a href="https://jekyllrb.com/" style="text-decoration: none;">Jekyll</a>. Reach me through eginovasardaana at berkeley dot edu</span>
+        </div>
+    
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+          <li class="ms-3"><a class="text-muted" href="https://www.linkedin.com/in/sardaana-eginova/"><svg class="bi" width="24" height="24"><use xlink:href="#linkedin"/></svg></a></li>
+          <li class="ms-3"><a class="text-muted" href="https://www.instagram.com/daanaea/"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+          <li class="ms-3"><a class="text-muted" href="https://github.com/daanaea"><svg class="bi" width="24" height="24"><use xlink:href="#github"/></svg></a></li>
+        </ul>
+      </footer>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>
